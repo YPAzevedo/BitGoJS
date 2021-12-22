@@ -13,6 +13,12 @@ export interface RequestTracer {
   toString(): string;
 }
 
+/**
+ * @deprecated use TransactionType.EnableAsset and TransactionType.DisableAsset
+ */
 export type TokenManagementType = 'enabletoken' | 'disabletoken';
 
+/**
+ * @deprecated use TransactionType.EnableAsset and TransactionType.DisableAsset
+ */
 export type ExplainTokenTxType= 'enableToken' | 'disableToken' | 'transferToken';

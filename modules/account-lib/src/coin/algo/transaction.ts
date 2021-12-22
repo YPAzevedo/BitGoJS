@@ -26,17 +26,13 @@ export class Transaction extends BaseTransaction {
     if (this._numberOfRequiredSigners === 0) {
       return false;
     }
-    if (this._numberOfRequiredSigners === 1) {
-      const kp = new KeyPair({ prv: key });
-      const addr = kp.getAddress();
-      if (addr === this._sender) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
+    if (this._numberOfRequiredSigners !== 1) {
       return true;
     }
+
+    const kp = new KeyPair({ prv: key });
+    const addr = kp.getAddress();
+    return addr === this._sender;
   }
 
   sender(address: string): void {
@@ -210,6 +206,7 @@ export class Transaction extends BaseTransaction {
       tokenId: this._algoTransaction?.assetIndex,
       genesisID: this._algoTransaction.genesisID,
       genesisHash: this._algoTransaction.genesisHash.toString('base64'),
+      txType: TransactionType[this.type],
     };
     if (this._algoTransaction.closeRemainderTo) {
       result.closeRemainderTo = algosdk.encodeAddress(this._algoTransaction.closeRemainderTo.publicKey);
@@ -230,7 +227,6 @@ export class Transaction extends BaseTransaction {
       }
     }
     if (result.type === 'axfer' && result.to && result.amount) {
-      result.txType = utils.getTokenTxType(result.amount, result.from, result.to, result.closeRemainderTo);
       result.tokenName = this._coinConfig.suffix;
     }
     return result;
