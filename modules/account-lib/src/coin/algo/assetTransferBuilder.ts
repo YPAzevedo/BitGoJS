@@ -94,7 +94,7 @@ export class AssetTransferBuilder extends TransferBuilder {
    * @private
    */
   private isOptInAssetTrx() {
-    return this._tokenId && !this.isOptOutAssetTxn() && this._amount === 0 && this._to === this._sender;
+    return this._tokenId && !this.isOptOutAssetTxn() && BigInt(this._amount) === BigInt(0) && this._to === this._sender;
   }
 
   /**

@@ -163,7 +163,7 @@ describe('Algo Asset Transfer Transaction Builder', () => {
       should.exists(txHex);
 
       txInfo.type.should.equal('axfer');
-      txInfo.txType.should.equal('DisableAsset');
+      txInfo.txType.should.equal('EnableAsset');
       txInfo.to.should.equal(address);
       txInfo.from.should.equal(address);
       txInfo.amount.should.equal('0');
@@ -201,7 +201,7 @@ describe('Algo Asset Transfer Transaction Builder', () => {
       should.exists(txHex);
 
       txInfo.type.should.equal('axfer');
-      txInfo.txType.should.equal('Send');
+      txInfo.txType.should.equal('EnableAsset');
       txInfo.to.should.equal(address);
       txInfo.from.should.equal(address);
       txInfo.amount.should.equal('0');

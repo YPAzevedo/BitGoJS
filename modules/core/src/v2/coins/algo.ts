@@ -239,12 +239,13 @@ export class Algo extends BaseCoin {
     const tx = (await txBuilder.build()) as Transaction;
     const txJson = tx.toJson();
 
-    if (tx.type === TransactionType.Send) {
-      return this.explainSendTransaction(txJson);
-    }
-
-    if (tx.type === TransactionType.WalletInitialization) {
-      return this.explainWalletInitializationException(txJson);
+    switch (tx.type) {
+      case TransactionType.Send:
+      case TransactionType.EnableAsset:
+      case TransactionType.DisableAsset:
+        return this.explainSendTransaction(txJson);
+      case TransactionType.WalletInitialization:
+        return this.explainWalletInitializationException(txJson);
     }
   }
 

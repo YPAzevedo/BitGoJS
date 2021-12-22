@@ -2,7 +2,7 @@ import { BaseCoin as CoinConfig } from '@bitgo/statics';
 import algosdk from 'algosdk';
 import { BaseTransaction, TransactionType } from '../baseCoin';
 import { BaseKey } from '../baseCoin/iface';
-import { InvalidTransactionError, InvalidKey, SigningError } from '../baseCoin/errors';
+import { InvalidKey, InvalidTransactionError, SigningError } from '../baseCoin/errors';
 import utils from './utils';
 import { KeyPair } from './keyPair';
 import { TxData } from './ifaces';
@@ -207,14 +207,21 @@ export class Transaction extends BaseTransaction {
       genesisID: this._algoTransaction.genesisID,
       genesisHash: this._algoTransaction.genesisHash.toString('base64'),
       txType: TransactionType[this.type],
+      amount: '0',
     };
+
     if (this._algoTransaction.closeRemainderTo) {
       result.closeRemainderTo = algosdk.encodeAddress(this._algoTransaction.closeRemainderTo.publicKey);
     }
-    if (this.type === TransactionType.Send) {
+
+    if (this._algoTransaction.to) {
       result.to = algosdk.encodeAddress(this._algoTransaction.to.publicKey);
+    }
+
+    if (this._algoTransaction.amount) {
       result.amount = this._algoTransaction.amount.toString();
     }
+
     if (this.type === TransactionType.WalletInitialization) {
       if (!this._algoTransaction.nonParticipation) {
         result.voteKey = this._algoTransaction.voteKey.toString('base64');

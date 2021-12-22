@@ -88,7 +88,7 @@ describe('Algo Transaction', () => {
       txInfo.genesisID.should.equal('testnet-v1.0');
       txInfo.genesisHash.should.equal('SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9/cOUJOiI=');
       txInfo.should.have.property('txType');
-      txInfo.txType.should.equal('enableToken');
+      txInfo.txType.should.equal('EnableAsset');
       txInfo.should.have.property('tokenName');
       txInfo.tokenName.should.equal('USON');
     });
@@ -114,7 +114,7 @@ describe('Algo Transaction', () => {
       txInfo.genesisID.should.equal('testnet-v1.0');
       txInfo.genesisHash.should.equal('SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9/cOUJOiI=');
       txInfo.should.have.property('txType');
-      txInfo.txType.should.equal('disableToken');
+      txInfo.txType.should.equal('DisableAsset');
       txInfo.should.have.property('txType');
       txInfo.tokenName.should.equal('USON');
     });
@@ -136,7 +136,7 @@ describe('Algo Transaction', () => {
       txInfo.lastRound.should.equal(1167);
       txInfo.genesisID.should.equal('testnet-v1.0');
       txInfo.genesisHash.should.equal('SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9/cOUJOiI=');
-      txInfo.txType.should.equal('transferToken');
+      txInfo.txType.should.equal('Send');
       txInfo.should.have.property('txType');
       txInfo.tokenName.should.equal('USON');
     });
